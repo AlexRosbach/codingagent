@@ -1,6 +1,6 @@
 {
   // ──────────────────────────────────────────────
-  // GitHub Copilot – Agent / Chat Configuration
+  // GitHub Copilot – Agent Configuration
   // ──────────────────────────────────────────────
 
   // Enable Copilot for all file types
@@ -13,31 +13,6 @@
 
   // Allow Copilot Agent to run multi-step tasks autonomously
   "github.copilot.chat.agent.runTasks": true,
-
-  // Load instruction file for all chat interactions
-  // Points to .github/copilot-instructions.md in workspace root
-  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
-
-  // Explicitly reference the instruction file
-  "github.copilot.chat.codeGeneration.instructions": [
-    {
-      "file": ".github/copilot-instructions.md"
-    }
-  ],
-
-  // Apply standards to code review requests as well
-  "github.copilot.chat.reviewSelection.instructions": [
-    {
-      "file": ".github/copilot-instructions.md"
-    }
-  ],
-
-  // Apply standards to test generation
-  "github.copilot.chat.generateTests.instructions": [
-    {
-      "file": ".github/copilot-instructions.md"
-    }
-  ],
 
   // Commit message generation – enforce Conventional Commits
   "github.copilot.chat.commitMessageGeneration.instructions": [

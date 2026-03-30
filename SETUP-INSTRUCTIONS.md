@@ -1,47 +1,43 @@
-# Setup Instructions
+# How to set up
 
-## Folder Renaming Required
+After extracting the ZIP, rename the following folders and file:
 
-The ZIP contains two folders with modified names to make them visible on all systems.
-Before using, rename them as follows:
+| What you see            | Rename to      |
+|-------------------------|----------------|
+| `[1] rename-to-.github` | `.github`      |
+| `[2] rename-to-.vscode` | `.vscode`      |
+| `[3] rename-to-.gitignore` | `.gitignore` |
 
-| Folder/File in ZIP    | Rename to      |
-|-----------------------|----------------|
-| `dotgithub/`          | `.github/`     |
-| `dotvscode/`          | `.vscode/`     |
-| `gitignore.txt`       | `.gitignore`   |
-
-## Final structure in your project root
+Your final project structure should look like this:
 
 ```
 your-project/
 ├── .github/
-│   └── copilot-instructions.md   ← Agent prompt (the core file)
+│   └── agents/
+│       └── dev-expert.agent.md
 ├── .vscode/
-│   ├── settings.json             ← VS Code + Copilot config
-│   └── extensions.json           ← Recommended extensions
+│   ├── settings.json
+│   └── extensions.json
+├── .gitignore
 ├── README.md
 ├── CHANGELOG.md
-├── LICENSE
-└── .gitignore
+└── LICENSE
 ```
 
-## Quick setup
+## Windows (PowerShell)
 
-### Windows (PowerShell)
 ```powershell
-Rename-Item "dotgithub" ".github"
-Rename-Item "dotvscode" ".vscode"
-Rename-Item "gitignore.txt" ".gitignore"
+Rename-Item "[1] rename-to-.github" ".github"
+Rename-Item "[2] rename-to-.vscode" ".vscode"
+Rename-Item "[3] rename-to-.gitignore" ".gitignore"
 ```
 
-### Mac / Linux (Terminal)
+## Mac / Linux (Terminal)
+
 ```bash
-mv dotgithub .github
-mv dotvscode .vscode
-mv gitignore.txt .gitignore
+mv "[1] rename-to-.github" .github
+mv "[2] rename-to-.vscode" .vscode
+mv "[3] rename-to-.gitignore" .gitignore
 ```
 
-After renaming, open the folder in VS Code — the agent is active immediately.
-
-See README.md for full setup instructions.
+After renaming, open the folder in VS Code and install the recommended extensions when prompted.

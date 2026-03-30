@@ -23,6 +23,10 @@ See [LICENSE](./LICENSE) for full terms.
 
 This repository contains a ready-to-use VS Code workspace configuration that turns GitHub Copilot into a **professional development expert agent** — one that knows and enforces your team's quality standards without being told every time.
 
+As you can imagine, this is a wip. 
+It includes only my personal permanent standards, which i used to implement in all my agents. 
+This is why i created this template. 
+
 Once set up, the agent will:
 
 - ✅ Always document before or alongside implementation

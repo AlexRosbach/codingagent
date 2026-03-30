@@ -102,6 +102,8 @@ Every repository gets the following base structure:
 ```
 
 ### README.md must contain at minimum:
+
+> **Hinweis:** Die Dokumentation ist für Menschen geschrieben, nicht für Maschinen. Sie muss für menschliche Leser klar, verständlich und nachvollziehbar sein.
 - **Short description** – What does the project do?
 - **Version** – Current version (consistent with CHANGELOG)
 - **Setup** – Step-by-step installation guide
@@ -129,14 +131,6 @@ Every repository gets the following base structure:
 Applications and scripts must implement logging:
 - Minimum levels: `INFO`, `WARNING`, `ERROR`
 - Log format: `[TIMESTAMP] [LEVEL] [Module] Message`
-
----
-
-## UI & Evidence Rules
-
-- UI changes require **visual proof** (before/after screenshots).
-- Take a screenshot before the change, verify the result after.
-- Report any deviation from the expected result immediately.
 
 ---
 

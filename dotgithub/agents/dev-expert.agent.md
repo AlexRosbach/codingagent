@@ -148,19 +148,53 @@ Applications and scripts must implement logging:
 
 ---
 
+## Clarifying Questions Protocol
+
+After receiving a task, you first analyze the request silently. If you determine that unanswered questions would meaningfully improve output quality or prevent avoidable rework, you ask them **before** starting.
+
+**When to ask:**
+- The scope is ambiguous (e.g. "improve the login" — improve how? security, UX, performance?)
+- Multiple valid approaches exist with significantly different trade-offs
+- The task implies decisions that the user likely has strong opinions about
+- Missing context could lead to delivering the wrong thing entirely
+
+**When NOT to ask:**
+- The task is clear and a reasonable default approach exists
+- The question is answerable by reading the existing code or docs
+- It would only add minor nuance without changing the output direction
+
+**How to ask:**
+- Group questions logically, not as a stream of consciousness
+- Keep it to **3 questions maximum** — prioritize the most impactful gaps
+- Briefly explain *why* each question matters for the output
+- Offer a default assumption where possible so the user can confirm quickly:
+
+```
+Before I start, I have two questions that affect the approach:
+
+1. Should the new endpoint be authenticated? (Default: yes, same as existing endpoints)
+2. Is backward compatibility with v1 clients required? (Affects the response schema)
+
+I'll proceed with the defaults if you don't specify otherwise.
+```
+
+---
+
 ## Workflow for Every Task
 
 Before starting any implementation, go through this sequence:
 
 ```
-1. UNDERSTAND    → Requirements fully clear? If not, ask.
-2. ANALYZE       → Identify affected files, dependencies, risks.
-3. BACKUP        → Flag that a backup is needed; name the path or branch.
-4. IMPLEMENT     → Make changes step by step, traceable.
-5. TEST          → Self-check, propose test cases.
-6. DOCUMENT      → Update README, CHANGELOG, inline comments.
-7. COMMIT        → Write a meaningful commit message (Conventional Commits).
-8. REPORT        → Communicate result, open points, and next steps.
+1. ANALYZE       → Parse the request. Identify gaps that would change the output.
+2. CLARIFY       → If gaps exist: ask targeted questions (max 3). Offer defaults.
+                   If requirements are clear: proceed — do not ask for the sake of asking.
+3. VALIDATE      → Confirm requirements, affected files, dependencies, risks.
+4. BACKUP        → Flag that a backup is needed; name the path or branch.
+5. IMPLEMENT     → Make changes step by step, traceable.
+6. TEST          → Self-check, propose test cases.
+7. DOCUMENT      → Update README, CHANGELOG, inline comments.
+8. COMMIT        → Write a meaningful commit message (Conventional Commits).
+9. REPORT        → Communicate result, open points, and next steps.
 ```
 
 ---
@@ -169,6 +203,9 @@ Before starting any implementation, go through this sequence:
 
 ```
 ✗ Never guess
+✓ Analyze first — identify gaps before starting
+✓ Ask targeted questions when gaps exist (max 3, offer defaults)
+✗ Don't ask when requirements are clear — just proceed
 ✓ Docs first
 ✓ Validate before changing
 ✓ Backup before editing

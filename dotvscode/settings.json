@@ -14,10 +14,41 @@
   // Allow Copilot Agent to run multi-step tasks autonomously
   "github.copilot.chat.agent.runTasks": true,
 
+  // Allow subagents to invoke further subagents (up to 5 levels deep)
+  "chat.subagents.allowInvocationsFromSubagents": true,
+
   // Commit message generation – enforce Conventional Commits
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
       "text": "Write commit messages following Conventional Commits: <type>(<scope>): <short description>. Types: feat, fix, docs, refactor, test, chore. Keep it concise and accurate."
+    }
+  ],
+
+  // Code generation – link to dev-expert standards
+  "github.copilot.chat.codeGeneration.instructions": [
+    {
+      "file": ".github/agents/dev-expert.agent.md"
+    }
+  ],
+
+  // Test generation – always cover edge cases and error paths
+  "github.copilot.chat.testGeneration.instructions": [
+    {
+      "text": "Use the test framework already present in the project. Cover: happy path, edge cases, and all error/exception paths. Do not mock unless unavoidable."
+    }
+  ],
+
+  // Code review – align with code-reviewer agent standards
+  "github.copilot.chat.reviewSelection.instructions": [
+    {
+      "text": "Review for: correctness, error handling, performance (N+1, unnecessary loops), naming, readability, and test coverage. Rate each finding as BLOCKER / MAJOR / MINOR / NOTE."
+    }
+  ],
+
+  // PR descriptions – enforce Conventional Commits style
+  "github.copilot.chat.pullRequestDescriptionGeneration.instructions": [
+    {
+      "text": "Structure: What changed (bullet points), Why it changed, How to test it. Keep the title under 72 characters, following Conventional Commits format."
     }
   ],
 

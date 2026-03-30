@@ -1,0 +1,36 @@
+{
+  // Recommended extensions for this workspace.
+  // VS Code will prompt users to install these when opening the project.
+  "recommendations": [
+    // ── AI Assistant ──────────────────────────────
+    "github.copilot",                              // GitHub Copilot – AI code completion
+    "github.copilot-chat",                         // Copilot Chat & Agent mode
+
+    // ── Git & Versioning ─────────────────────────
+    "eamodio.gitlens",                             // Enhanced Git history, blame, compare
+    "mhutchie.git-graph",                          // Visual Git branch graph
+    "vivaxy.vscode-conventional-commits",          // Conventional Commits picker in Git panel
+
+    // ── Code Quality ──────────────────────────────
+    "esbenp.prettier-vscode",                      // Prettier – code formatter
+    "dbaeumer.vscode-eslint",                      // ESLint – JavaScript/TypeScript linting
+    "ms-python.python",                            // Python support
+    "ms-python.pylint",                            // Python linting
+
+    // ── Documentation ─────────────────────────────
+    "yzhang.markdown-all-in-one",                  // Markdown editor enhancements
+    "bierner.markdown-preview-github-styles",      // GitHub-style Markdown preview
+    "davidanson.vscode-markdownlint",              // Markdown linting
+
+    // ── Utilities ─────────────────────────────────
+    "streetsidesoftware.code-spell-checker",       // Spell checker for code
+    "gruntfuggly.todo-tree",                       // TODO/FIXME tracker in explorer
+    "editorconfig.editorconfig",                   // .editorconfig support
+
+    // ── Optional / Infrastructure ─────────────────
+    "ms-vscode-remote.remote-ssh",                 // Remote development via SSH
+    "ms-azuretools.vscode-docker"                  // Docker support
+  ],
+
+  "unwantedRecommendations": []
+}

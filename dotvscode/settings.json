@@ -1,0 +1,69 @@
+{
+  // ──────────────────────────────────────────────
+  // GitHub Copilot – Agent / Chat Configuration
+  // ──────────────────────────────────────────────
+
+  // Enable Copilot for all file types
+  "github.copilot.enable": {
+    "*": true,
+    "markdown": true,
+    "plaintext": false,
+    "scminput": false
+  },
+
+  // Allow Copilot Agent to run multi-step tasks autonomously
+  "github.copilot.chat.agent.runTasks": true,
+
+  // Load instruction file for all chat interactions
+  // Points to .github/copilot-instructions.md in workspace root
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+
+  // Explicitly reference the instruction file
+  "github.copilot.chat.codeGeneration.instructions": [
+    {
+      "file": ".github/copilot-instructions.md"
+    }
+  ],
+
+  // Apply standards to code review requests as well
+  "github.copilot.chat.reviewSelection.instructions": [
+    {
+      "file": ".github/copilot-instructions.md"
+    }
+  ],
+
+  // Apply standards to test generation
+  "github.copilot.chat.generateTests.instructions": [
+    {
+      "file": ".github/copilot-instructions.md"
+    }
+  ],
+
+  // Commit message generation – enforce Conventional Commits
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Write commit messages following Conventional Commits: <type>(<scope>): <short description>. Types: feat, fix, docs, refactor, test, chore. Keep it concise and accurate."
+    }
+  ],
+
+  // ──────────────────────────────────────────────
+  // Editor Settings (team defaults)
+  // ──────────────────────────────────────────────
+
+  "editor.formatOnSave": true,
+  "editor.rulers": [100],
+  "editor.tabSize": 2,
+  "editor.detectIndentation": true,
+  "editor.insertSpaces": true,
+  "editor.trimAutoWhitespace": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+
+  // ──────────────────────────────────────────────
+  // Explorer / Workspace Safety
+  // ──────────────────────────────────────────────
+
+  "explorer.confirmDelete": true,
+  "explorer.confirmDragAndDrop": true
+}

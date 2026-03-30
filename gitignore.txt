@@ -1,0 +1,19 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor temp files
+*.swp
+*.swo
+*~
+
+# Node (if used locally)
+node_modules/
+npm-debug.log*
+
+# Python (if used locally)
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/

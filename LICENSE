@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 AlexRos
+Copyright (c) 2026 Alex Rosbach (https://github.com/AlexRosbach)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+USE AT YOUR OWN RISK. This configuration modifies how AI tools behave in your
+development environment. Always review AI-generated suggestions before applying
+them. The author accepts no responsibility for data loss, unintended behavior,
+or any other issues arising from the use of this configuration.

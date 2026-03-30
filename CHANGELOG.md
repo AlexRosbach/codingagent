@@ -10,6 +10,21 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.2.0] – 2026-03-30
+
+### Added
+- `doc-writer.agent.md` — documentation subagent for README, CHANGELOG, JSDoc, and inline comments
+- `code-reviewer.agent.md` — code review subagent covering correctness, performance, naming, error handling, and test coverage (BLOCKER/MAJOR/MINOR/NOTE severity model)
+- `security.agent.md` — security audit subagent with full OWASP Top 10 checklist, secrets scan, input validation, and dependency audit (CRITICAL/HIGH/MEDIUM/LOW severity model)
+- Orchestrator pattern in `dev-expert.agent.md`: `agents:` frontmatter field registers all three subagents; new delegation table and updated workflow
+
+### Changed
+- `dev-expert.agent.md` promoted to orchestrator; added subagent delegation section with trigger table and delegation rules
+- `.vscode/settings.json` extended with `chat.subagents.allowInvocationsFromSubagents`, `codeGeneration.instructions`, `testGeneration.instructions`, `reviewSelection.instructions`, and `pullRequestDescriptionGeneration.instructions`
+- README updated to v1.2.0: new architecture overview table, orchestrator flow diagram, direct subagent usage, context variable reference, extended troubleshooting
+
+---
+
 ## [1.1.0] – 2026-03-30
 
 ### Added

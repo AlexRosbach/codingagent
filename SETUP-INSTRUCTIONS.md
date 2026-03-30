@@ -14,7 +14,10 @@ Your final project structure should look like this:
 your-project/
 ├── .github/
 │   └── agents/
-│       └── dev-expert.agent.md
+│       ├── dev-expert.agent.md       ← Orchestrator
+│       ├── doc-writer.agent.md       ← Documentation subagent
+│       ├── code-reviewer.agent.md    ← Code review subagent
+│       └── security.agent.md         ← Security audit subagent
 ├── .vscode/
 │   ├── settings.json
 │   └── extensions.json

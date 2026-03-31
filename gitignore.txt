@@ -17,3 +17,6 @@ __pycache__/
 *.pyo
 .env
 venv/
+
+# Local Copilot project memory
+PROJECT-WORKSPACE-MEMORY.md

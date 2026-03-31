@@ -10,6 +10,27 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.3.0] – 2026-03-30
+
+### Added
+- `feature-builder.agent.md` as a dedicated specialist for new feature implementation
+- `bugfixer.agent.md` as a dedicated specialist for root-cause-driven bug fixing
+- `test-writer.agent.md` as a dedicated specialist for test and regression coverage
+- `PROJECT-WORKSPACE-MEMORY.md` as a local workspace memory file for project-specific context
+- `PROJECT-BOOTSTRAP-QUESTIONS.md` as the source of grouped first-run project questions
+- `PROMPT-EXAMPLES.md` with practical day-to-day prompt examples for VS Code Copilot use
+
+### Changed
+- `dev-expert.agent.md` rewritten into a leaner orchestrator with mandatory first-run bootstrap, local project memory handling, and clearer delegation rules
+- `code-reviewer.agent.md` tightened toward practical diff/file review with clearer priorities and less generic phrasing
+- `security.agent.md` tightened toward practical auth, secrets, injection, configuration, and dependency risk review
+- `README.md` rewritten for Version 1.3.0, including the new agent layout, bootstrap flow, local project memory, and practical prompt usage
+- `SETUP-INSTRUCTIONS.md` updated to fully reflect the intentional `dotgithub` / `dotvscode` / `gitignore.txt` packaging model and the expanded agent structure
+- `gitignore.txt` updated so `PROJECT-WORKSPACE-MEMORY.md` stays local by default unless explicitly shared
+- `dotvscode/settings.json` uses both the main agent instructions and `PROJECT-WORKSPACE-MEMORY.md` as Copilot instruction inputs
+
+---
+
 ## [1.2.0] – 2026-03-30
 
 ### Added

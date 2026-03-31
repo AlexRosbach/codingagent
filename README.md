@@ -1,48 +1,91 @@
 # VS Code Development Expert Agent
 
-![Version](https://img.shields.io/badge/version-1.2.0-blue)
+![Version](https://img.shields.io/badge/version-1.3.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![VS Code](https://img.shields.io/badge/VS%20Code-1.99%2B-007ACC?logo=visualstudiocode)
 ![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-required-black?logo=github)
 
-A multi-agent template for GitHub Copilot in VS Code. Drop it into any project and Copilot becomes a development expert that actually follows your rules — without you having to repeat yourself every time.
+Version **1.3.0** is a more practical multi-agent template for GitHub Copilot in VS Code.
+It keeps the intentional packaging style (`dotgithub`, `dotvscode`, `gitignore.txt`), adds first-run project bootstrap with local workspace memory, and expands the agent system with dedicated roles for features, bugfixes, and tests.
+
+The goal is simple:
+**less generic Copilot behavior, more project-aware support with less repetitive prompting.**
 
 > **Use at your own risk.** No warranties, no guarantees. See [LICENSE](./LICENSE).
 
 ---
 
-## What it does
+## What is new in 1.3.0
 
-A lead agent orchestrates three specialized subagents that run automatically based on the task:
+### Major improvements
+- `dev-expert` was rewritten to be **leaner and more practical**
+- first-run **project bootstrap questions** are now mandatory
+- answers are stored in a local memory file: `PROJECT-WORKSPACE-MEMORY.md`
+- three new specialist agents were added:
+  - `feature-builder`
+  - `bugfixer`
+  - `test-writer`
+- `code-reviewer` and `security` were tightened to be more practical and less generic
+- setup/docs were updated to fully match the intentional `dotgithub` / `dotvscode` / `gitignore.txt` packaging model
+- new helper docs were added:
+  - `PROJECT-BOOTSTRAP-QUESTIONS.md`
+  - `PROMPT-EXAMPLES.md`
+
+### Why this version is better
+This version is designed to use more of Copilot's practical potential in VS Code:
+- one-time project context capture
+- reusable local project memory
+- stronger role separation
+- clearer day-to-day prompt patterns
+- less overgrown orchestrator behavior
+
+---
+
+## Agent system
 
 | Agent | Invocation | Responsibility |
 |---|---|---|
-| `@dev-expert` | Main entry point | Orchestrator — analyzes tasks, delegates, synthesizes results |
-| `@doc-writer` | Auto-delegated or direct | README, CHANGELOG, JSDoc, inline comments |
-| `@code-reviewer` | Auto-delegated or direct | Correctness, performance, naming, error handling, test coverage |
-| `@security` | Auto-delegated or direct | OWASP Top 10, secrets, injection, auth flaws, dependency audit |
+| `@dev-expert` | Main entry point | Lean orchestrator, first-run bootstrap, task routing |
+| `@feature-builder` | Direct or delegated | New feature implementation |
+| `@bugfixer` | Direct or delegated | Root-cause bug fixing |
+| `@test-writer` | Direct or delegated | Tests and regression coverage |
+| `@doc-writer` | Direct or delegated | README, CHANGELOG, JSDoc, inline docs |
+| `@code-reviewer` | Direct or delegated | Correctness, maintainability, performance, test gaps |
+| `@security` | Direct or delegated | Auth, secrets, injection, config, dependency risk |
 
-The orchestrator decides who does what:
+### Typical flow
+```text
+User: @dev-expert Add a password reset flow
 
+1. dev-expert checks project memory
+2. if first run: asks grouped bootstrap questions once
+3. stores the confirmed answers locally
+4. delegates implementation to feature-builder
+5. delegates tests to test-writer if needed
+6. delegates review/security/docs when useful
+7. returns a practical summary
 ```
-User: "Add a login endpoint"
 
-dev-expert
- ├── implements the feature
- ├── delegates docs   → @doc-writer   (updates README, JSDoc)
- ├── delegates review → @code-reviewer (checks correctness, naming)
- └── delegates audit  → @security     (checks for auth/injection issues)
-```
+---
 
-All agents share the same non-negotiable standards:
+## Important packaging note
 
-- Never guess — only act on verifiable facts
-- Documentation before or alongside code, never after
-- Validate requirements and affected files before touching anything
-- Backup before edits, rollback immediately on failure
-- Semantic Versioning across README, CHANGELOG, and code
-- Conventional Commits on every meaningful change
-- Stop and ask when something is unclear — no improvising
+This repository intentionally uses:
+- `dotgithub`
+- `dotvscode`
+- `gitignore.txt`
+
+instead of real dot names.
+
+That is **intentional** and kept on purpose.
+It makes packaging, upload, reuse, and copying easier.
+
+Before using the template in a real project, rename them to:
+- `.github`
+- `.vscode`
+- `.gitignore`
+
+See [SETUP-INSTRUCTIONS.md](./SETUP-INSTRUCTIONS.md).
 
 ---
 
@@ -54,103 +97,182 @@ All agents share the same non-negotiable standards:
 
 ---
 
-## Setup
+## Files included
 
-**New project — use this as a template:**
-Click "Use this template" on GitHub, clone, open in VS Code. Done.
-
-**Existing project — copy these files:**
-
-```
-your-project/
-├── .github/
+```text
+repo-root/
+├── dotgithub/
 │   └── agents/
-│       ├── dev-expert.agent.md       ← Orchestrator
-│       ├── doc-writer.agent.md       ← Documentation subagent
-│       ├── code-reviewer.agent.md    ← Code review subagent
-│       └── security.agent.md         ← Security audit subagent
-├── .vscode/
+│       ├── dev-expert.agent.md
+│       ├── feature-builder.agent.md
+│       ├── bugfixer.agent.md
+│       ├── test-writer.agent.md
+│       ├── doc-writer.agent.md
+│       ├── code-reviewer.agent.md
+│       └── security.agent.md
+├── dotvscode/
 │   ├── settings.json
 │   └── extensions.json
-└── .gitignore
-```
-
-When VS Code prompts to install recommended extensions, click **Install All**.
-
----
-
-## Using the agents
-
-Open Copilot Chat (`Ctrl+Shift+I`).
-
-**Normal use — let the orchestrator handle everything:**
-
-```
-@dev-expert Add a password reset flow
-```
-
-The orchestrator automatically delegates documentation, review, and security audit.
-
-**Direct subagent access — when you know exactly what you need:**
-
-```
-@doc-writer Update the README for the new config options
-@code-reviewer Review src/api/auth.ts for correctness
-@security Audit the login endpoint for OWASP issues
-```
-
-**Context variables that improve results:**
-
-| Variable | Use case |
-|---|---|
-| `#codebase` | Let the agent search the full project |
-| `#problems` | Include current errors/warnings from the Problems panel |
-| `#changes` | Include current Git diff |
-| `#terminalLastCommand` | Include last terminal output (e.g. failed test run) |
-| `#file` | Reference a specific file |
-
-Example:
-```
-@dev-expert #changes Review everything I changed today and check for issues
+├── gitignore.txt
+├── PROJECT-WORKSPACE-MEMORY.md
+├── PROJECT-BOOTSTRAP-QUESTIONS.md
+├── PROMPT-EXAMPLES.md
+├── README.md
+├── CHANGELOG.md
+└── LICENSE
 ```
 
 ---
 
-## Customizing
+## First-run bootstrap behavior
 
-**Add project-specific rules** at the bottom of `.github/agents/dev-expert.agent.md`:
+On the first meaningful `@dev-expert` call, the agent should:
+1. check whether `PROJECT-WORKSPACE-MEMORY.md` is missing or incomplete
+2. read `PROJECT-BOOTSTRAP-QUESTIONS.md`
+3. ask a short grouped question set
+4. write confirmed answers into `PROJECT-WORKSPACE-MEMORY.md`
+5. reuse that memory on later tasks instead of re-asking baseline project questions
 
-```markdown
-## Project-Specific Rules
+### The bootstrap should capture
+- stack and runtime
+- install / dev / build / test / lint commands
+- important folders and entrypoints
+- architecture rules
+- coding / naming / docs / testing preferences
+- security and deployment constraints
+- definition of done
 
-- Framework: React 18 with TypeScript
-- Styling: Tailwind CSS only
-- Always respond in German
+### What the bootstrap should not do
+- ask the same baseline project questions every time
+- invent facts and store them as if confirmed
+- produce a huge interrogation
+
+---
+
+## Setup
+
+### Existing project
+1. Copy this package into your project root.
+2. Rename:
+   - `dotgithub` → `.github`
+   - `dotvscode` → `.vscode`
+   - `gitignore.txt` → `.gitignore`
+3. Open the project in VS Code.
+4. Install recommended extensions.
+5. Open Copilot Chat.
+6. Start with `@dev-expert`.
+7. Answer the bootstrap questions once.
+8. Let the agent keep that context in `PROJECT-WORKSPACE-MEMORY.md`.
+
+### New project
+Same process. This package is designed to be reusable as a practical starter template.
+
+---
+
+## Best prompt patterns
+
+See [PROMPT-EXAMPLES.md](./PROMPT-EXAMPLES.md).
+
+Quick examples:
+
+### First run
+```text
+@dev-expert Help me bootstrap this project for future work.
 ```
 
-**Adjust subagent behavior** by editing the relevant agent file directly:
-- Documentation standards → `doc-writer.agent.md`
-- Review criteria → `code-reviewer.agent.md`
-- Security checks → `security.agent.md`
-
-**Add more subagents** by creating new `.agent.md` files and registering them in the orchestrator's `agents:` list:
-
-```yaml
-# dev-expert.agent.md frontmatter
-agents: ['doc-writer', 'code-reviewer', 'security', 'your-new-agent']
+### Build a feature
+```text
+@dev-expert #codebase Add a password reset flow that matches the existing API style.
 ```
+
+### Fix a bug
+```text
+@bugfixer #problems #terminalLastCommand Fix the failing login timeout behavior.
+```
+
+### Write tests
+```text
+@test-writer #changes Add tests for the logic changed in this diff.
+```
+
+### Review a diff
+```text
+@code-reviewer #changes Review today’s diff for correctness, readability, and test gaps.
+```
+
+### Security audit
+```text
+@security #file Audit this endpoint for auth, injection, and secret handling.
+```
+
+---
+
+## Project memory file
+
+`PROJECT-WORKSPACE-MEMORY.md` is the local project memory.
+
+It should hold:
+- stack
+- commands
+- key architecture facts
+- coding conventions
+- testing expectations
+- security and deployment constraints
+- product / team preferences
+
+By default, this file is ignored via `gitignore.txt`, so it can stay local.
+If you want the whole team to share it, remove that ignore rule.
+
+---
+
+## Workspace integration
+
+`dotvscode/settings.json` includes both:
+- the main orchestrator agent instructions
+- the local workspace memory file
+
+That way Copilot can use both generic agent behavior and the project's stored local context.
+
+---
+
+## What changed compared to earlier versions
+
+### Before
+- one orchestrator with docs/review/security support
+- useful, but still too generic
+- no real project memory
+- no dedicated feature / bugfix / test roles
+
+### In 1.3.0
+- leaner orchestrator
+- local project bootstrap memory
+- stronger role specialization
+- better everyday prompt examples
+- more practical VS Code Copilot workflow
 
 ---
 
 ## Troubleshooting
 
-**`@dev-expert` not showing up** — confirm the file is at `.github/agents/dev-expert.agent.md` and VS Code is 1.99+. Restart VS Code.
+**`@dev-expert` not showing up**
+- check that `dotgithub` was renamed to `.github`
+- restart VS Code
 
-**Subagents not being invoked** — make sure `settings.json` is in place and reload the window (`Ctrl+Shift+P` → `Developer: Reload Window`).
+**Specialist agents not showing up**
+- confirm all `.agent.md` files are in `.github/agents/`
+- reload the VS Code window
 
-**Agent ignores the standards** — verify the `agents:` field in `dev-expert.agent.md` frontmatter lists all subagent names exactly as their `name:` field declares them.
+**Bootstrap questions never happen**
+- check whether `PROJECT-WORKSPACE-MEMORY.md` still says `Bootstrap completed: no`
+- if needed, clear or reset the file and call `@dev-expert` again
 
-**Subagent can't call another subagent** — check that `chat.subagents.allowInvocationsFromSubagents` is `true` in `.vscode/settings.json`.
+**Copilot ignores project context**
+- confirm `.vscode/settings.json` exists after rename
+- confirm `PROJECT-WORKSPACE-MEMORY.md` exists in the project root
+
+**The project memory should be shared with the team**
+- remove `PROJECT-WORKSPACE-MEMORY.md` from `.gitignore`
+- commit the file normally
 
 ---
 

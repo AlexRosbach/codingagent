@@ -24,10 +24,13 @@
     }
   ],
 
-  // Code generation – link to dev-expert standards
+  // Code generation – link to dev-expert standards + local project memory
   "github.copilot.chat.codeGeneration.instructions": [
     {
       "file": ".github/agents/dev-expert.agent.md"
+    },
+    {
+      "file": "PROJECT-WORKSPACE-MEMORY.md"
     }
   ],
 
